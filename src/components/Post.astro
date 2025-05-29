@@ -1,24 +1,25 @@
 ---
-import "../styles/global.css";
 const {
-  post: { title, description, content, created_at },
+  post: { title, description, content, created_at, id},
 } = Astro.props;
 ---
 
-<article
-  class="bg-[#1F2937] text-white max-w-sm px-5 py-6 flex flex-col gap-2 rounded"
->
-  <img
-    src="https://canalsenior.es/wp-content/uploads/2022/06/foto-edicion-personas-mayores-canal-senior.jpg"
-    alt=""
-    class="rounded"
-  />
-  <h2 class="text-2x1 font-bold">{title}</h2>
-  <p>{description}</p>
-  <p class="text-zinc-300">
-    {content.slice(0, 100) + "..."}
-  </p>
-  <p class="text-zinc-300">
-    {new Date(created_at).toLocaleDateString()} - 16 min read
-  </p>
-</article>
+<a href={`/posts/${id}`}>
+  <article
+    class="bg-[#1F2937] text-white max-w-sm px-5 py-6 flex flex-col gap-2 rounded"
+  >
+    <img
+      src="https://canalsenior.es/wp-content/uploads/2022/06/foto-edicion-personas-mayores-canal-senior.jpg"
+      alt=""
+      class="rounded"
+    />
+    <h2 class="text-2x1 font-bold">{title}</h2>
+    <p>{description}</p>
+    <p class="text-zinc-300">
+      {content.slice(0, 100) + "..."}
+    </p>
+    <p class="text-zinc-300">
+      {new Date(created_at).toLocaleDateString()} - 16 min read
+    </p>
+  </article>
+</a>

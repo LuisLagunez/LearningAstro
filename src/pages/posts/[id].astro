@@ -1,0 +1,32 @@
+---
+import DefaultLayout from "../../layouts/DefaultLayout.astro";
+export async function getStaticPaths() {
+  const response = await fetch("http://localhost:3000/posts");
+  const posts = await response.json();
+  return posts.map((post) => {
+    return {
+      params: { id: post.id },
+    };
+  });
+}
+const { id } = Astro.params;
+const postResponse = await fetch(`http://localhost:3000/posts/${id}`);
+const { title, description, content, created_at } = await postResponse.json();
+---
+
+<DefaultLayout>
+  <div>
+    <article class="text-black max-w-4xl mx-auto px-5 py-6 flex flex-col gap-2 rounded">
+      <img
+        src="https://canalsenior.es/wp-content/uploads/2022/06/foto-edicion-personas-mayores-canal-senior.jpg"
+        alt=""
+        class="rounded"
+      />
+      <h2 class="text-2x1 font-bold">{title}</h2>
+      <p>{description}</p>
+      <p>
+        {content}
+      </p>
+    </article>
+  </div>
+</DefaultLayout>
